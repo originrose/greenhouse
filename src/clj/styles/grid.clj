@@ -71,6 +71,14 @@
    :padding-left pad
    :padding-right pad})
 
+(defn uncenter
+  []
+  {:max-width :none
+   :margin-right 0
+   :margin-left 0
+   :padding-left 0
+   :padding-right 0})
+
 (defn margin
   [side]
   (keyword (str "margin-" (name side))))
@@ -153,3 +161,41 @@
            (margin side) (percent margin-l)
            (opposite-margin side) (percent margin-r)}
           cycles)))
+
+(defn stack
+  "Examples:
+  (stack)
+  (stack :pad 10 :align :center)
+  "
+  [& {:keys [pad align]
+      :or {pad 0 align false}}]
+  (let [side (direction->side *layout-direction*)]
+    (list
+    {:display :block
+     :clear :both
+     :float :none
+     :width (percent 100)
+     :margin-left :auto
+     :margin-right :auto}
+    (if (pos? pad)
+      {:padding-left pad
+       :padding-right pad}
+      [])
+    (if align
+      {:text-align align})
+    [[:&:first-child {(margin side) :auto}]
+     [:&:last-child {(opposite-margin side) :auto}]])))
+
+(defn unstack
+  []
+  (let [side (direction->side *layout-direction*)]
+    (list
+      {:text-align side
+       :display :inline
+       :clear :none
+       :width :auto
+       :margin-left 0
+       :margin-right 0
+       }
+      [[:&:first-child {(margin side) 0}]
+       [:&:last-child {(opposite-margin side) 0}]])))

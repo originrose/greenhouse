@@ -60,6 +60,10 @@
     [:h3 "(span 1/4)"]
     [:div.spanning
      (repeat 8 [:div (rand-string 5)])]
+
+    [:h3 "(stack :pad 10 :align :center)"]
+    [:div.spanning
+     (repeat 4 [:div (rand-string 10)])]
     ]])
 
 (defn home-page []
