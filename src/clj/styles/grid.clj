@@ -92,7 +92,6 @@
 (defn cycle-props
   "Returns the relevant properties to implementing column cycling."
   [cycle side margin-r margin-last]
-  (println "cycle-props: " cycle side margin-r margin-last)
   (if (zero? cycle)
     [:&:last-child {(opposite-margin side) (percent margin-last)}]
 
@@ -135,4 +134,22 @@
            (opposite-margin side) (percent margin-r)}
           cycles)))
 
-
+(defn span
+  [& {:keys [ratio offset cycle uncycle gutter]
+      :or {ratio 1 offset 0 cycle 0 uncycle 0}}]
+  (let [side (direction->side *layout-direction*)
+        width (* ratio 100)
+        margin-r (if (neg? offset) (* (- offset) 100) 0)
+        margin-l (if (pos? offset) (* offset 100) 0)
+        cycles (if (pos? cycle)
+                 [[(str "&:nth-of-type(" cycle "n)")
+                   {:float (opposite-side side)}]
+                  [(str "&:nth-of-type(" cycle "n+1)")
+                   {:clear :both}]]
+                 [])]
+    (list {:float side
+           :clear :none
+           :width (percent width)
+           (margin side) (percent margin-l)
+           (opposite-margin side) (percent margin-r)}
+          cycles)))

@@ -5,7 +5,7 @@
     [garden.stylesheet :refer [at-media]]
     [garden.units :as u :refer [px pt em percent]]
     [garden.color :as color :refer [hsl rgba]]
-    [styles.grid :refer [column clearfix center]]))
+    [styles.grid :refer [column span clearfix center]]))
 
 (defstyles screen
   [[:body
@@ -39,13 +39,17 @@
     [:div
      {:background-color (rgba 200 200 250 0.5)
       :margin-bottom (px 5)}
-     (column :ratio 1/5 :offset 3/5)
-     ]]
+     (column :ratio 1/5 :offset 3/5)]]
 
    [:div.cycling
     [:div
      (column :ratio 1/3 :cycle 3)
      {:background-color (rgba 250 200 250 0.5)
-      :margin-bottom (px 5)}
+      :margin-bottom (px 5)}]]
+
+   [:div.spanning
+    [:div
+     (span :ratio 1/4)
+     {:background-color (rgba 200 250 250 0.5)}
      ]]
   ])

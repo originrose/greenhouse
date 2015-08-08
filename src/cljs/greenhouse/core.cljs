@@ -57,7 +57,7 @@
     [:div.cycling
      (repeatedly 12 (fn [] [:div (rand-string 8)]))]
 
-    [:h3 "(span 1/8)"]
+    [:h3 "(span 1/4)"]
     [:div.spanning
      (repeat 8 [:div (rand-string 5)])]
     ]])
