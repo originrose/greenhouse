@@ -57,11 +57,26 @@
     [:div.cycling
      (repeatedly 12 (fn [] [:div (rand-string 8)]))]
 
+    [:h3 "(column :ratio 1/2)"]
+    [:div.nested
+     [:div
+      (repeat 2
+              [:div.inside
+               [:h4 "(column :ratio 1/3 :gutter 10)"]
+               (repeatedly 3 (fn [] [:div.a (rand-string 5)]))])]
+
+     [:div
+      (repeat 2
+              [:div.inside
+               [:h4 "(column :ratio 1/5)"]
+               (repeatedly 5 (fn [] [:div.b (rand-string 5)]))])]]
+
     [:h3 "(span 1/4)"]
     [:div.spanning
-     (repeat 8 [:div (rand-string 5)])]
+     (repeatedly 8 (fn [] [:div (rand-string 5)]))]
 
     [:h3 "(stack :pad 10 :align :center)"]
+
     [:div.stacked
      (repeat 4 [:div (rand-string 10)])]
 

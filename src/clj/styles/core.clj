@@ -14,9 +14,9 @@
      :line-height 1.5}]
 
    [:h3
+    (clearfix)
     {:clear :both
-     ;:border-top "2px solid blue"
-     :padding (px 3)}]
+     :padding-top (px 35)}]
 
    [:div.header
     ;{:border "1px solid grey"
@@ -46,6 +46,17 @@
      (column :ratio 1/3 :cycle 3)
      {:background-color (rgba 250 200 250 0.5)
       :margin-bottom (px 5)}]]
+
+   [:div.nested
+    [:div.inside
+     (column :ratio 1/2)
+     {:background-color (rgba 200 200 150 0.5)}
+     [:div.a
+      (column :ratio 1/3 :gutter 10)
+      {:background-color (rgba 150 200 250 0.5)}]
+     [:div.b
+      (column :ratio 1/5)
+      {:background-color (rgba 250 150 250 0.5)}]]]
 
    [:div.spanning
     [:div
