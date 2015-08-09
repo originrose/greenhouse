@@ -62,8 +62,11 @@
      (repeat 8 [:div (rand-string 5)])]
 
     [:h3 "(stack :pad 10 :align :center)"]
-    [:div.spanning
+    [:div.stacked
      (repeat 4 [:div (rand-string 10)])]
+
+    [:h3 "(align :horizontal)"]
+    [:div.aligned "aligned!"]
     ]])
 
 (defn home-page []

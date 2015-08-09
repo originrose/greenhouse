@@ -199,3 +199,23 @@
        }
       [[:&:first-child {(margin side) 0}]
        [:&:last-child {(opposite-margin side) 0}]])))
+
+(def alignments
+  {:horizontal {:left (percent 50)
+                :transform "translateX(-50%)"}
+   :vertical {:top (percent 50)
+              :transform "translateY(-50%)"}
+   :none {:top :auto
+          :left :auto
+          :transform "translate(0, 0)"}
+   :both {:top (percent 50)
+          :left (percent 50)
+          :transform "translate(-50%, -50%)"}})
+
+(defn align
+  [& {:keys [direction]
+      :or {direction :both}}]
+  (merge {:position :absolute
+          :transform-style :preserve-3d}
+         (get alignments direction)))
+

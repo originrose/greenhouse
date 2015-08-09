@@ -5,7 +5,7 @@
     [garden.stylesheet :refer [at-media]]
     [garden.units :as u :refer [px pt em percent]]
     [garden.color :as color :refer [hsl rgba]]
-    [styles.grid :refer [column span clearfix center stack]]))
+    [styles.grid :refer [column span clearfix center stack align]]))
 
 (defstyles screen
   [[:body
@@ -54,6 +54,11 @@
 
    [:div.stacked
     [:div
-     (stack :pad 10 :align :center)]]
+     (stack :pad 10 :align :center)
+     {:background-color (rgba 250 250 200 0.5)}]]
+
+   [:div.aligned
+    (align :direction :horizontal)
+    {:background-color (rgba 250 180 180 0.5)}]
 
   ])
