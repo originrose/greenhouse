@@ -1,11 +1,12 @@
-(ns styles.core
+(ns greenhouse.demo.core
   (:require
     [garden.def :refer [defstylesheet defstyles]]
     [garden.core :refer [css]]
     [garden.stylesheet :refer [at-media]]
     [garden.units :as u :refer [px pt em percent]]
     [garden.color :as color :refer [hsl rgba]]
-    [styles.grid :refer [column span clearfix center stack align]]))
+    [greenhouse.grid :refer [column span clearfix center stack align on]]
+    [greenhouse.typography :refer [golden-ratio golden-line-height]]))
 
 (defstyles screen
   [[:body
@@ -21,12 +22,22 @@
    [:div.header
     ;{:border "1px solid grey"
     ;:background-color (rgba 100 100 100 0.1)}
-    (center :max-width 800)]
+    (center :max-width 1200)]
 
    [:div.thirds
     [:div
      (column :ratio 1/3)
      {:background-color (rgba 250 200 200 0.5)
+      :margin-bottom (px 5)}]]
+
+   [:div.uneven
+    [:div.sidebar
+     (column :ratio 1/6)
+     {:background-color (rgba 250 100 100 0.5)
+      :margin-bottom (px 5)}]
+    [:div.content
+     (column :ratio 4/6 :offset 1/6)
+     {:background-color (rgba 150 150 250 0.5)
       :margin-bottom (px 5)}]]
 
    [:div.fifths
@@ -43,7 +54,18 @@
 
    [:div.cycling
     [:div
-     (column :ratio 1/3 :cycle 3)
+     (stack)
+     ;(on :mobile
+     ;    [:& (column :ratio 1/2 :cycle 2)])
+     (on :tablet
+         [:& (column :ratio 1/3 :cycle 3)])
+     (on :laptop
+         [:& (column :ratio 1/4 :cycle 4)])
+     (on :desktop
+         [:& (column :ratio 1/5 :cycle 5)])
+     (on :hd
+         [:& (column :ratio 1/6 :cycle 6)])
+     ;(column :ratio 1/3 :cycle 3)
      {:background-color (rgba 250 200 250 0.5)
       :margin-bottom (px 5)}]]
 
@@ -72,4 +94,6 @@
     (align :direction :horizontal)
     {:background-color (rgba 250 180 180 0.5)}]
 
+   [:div.golden
+    (golden-ratio :font-size 18 :width 600)]
   ])

@@ -1,24 +1,16 @@
-(ns styles.grid
+(ns greenhouse.grid
   (:require
     [garden.core :refer [css]]
     [garden.stylesheet :refer [at-media]]
     [garden.units :as u :refer [px pt em percent]]
     [garden.color :as color :refer [hsl rgb]]))
 
-
-; (css (at-media {:screen true} [:h1 {:font-weight "bold"}]))
-;    =>   "@media screen{h1{font-weight:bold}}"
-
-; (css (at-media {:min-width (px 768) :max-width (px 979)}
-;          [:container {:width (px 960)}])
-;    => "@media (max-width:979px) and (min-width:768px){container{width:960px}}"
-
 (def ^:dynamic *layout-direction* :left->right)
 (def ^:dynamic *default-gutter* 3)
 (def ^:dynamic *parent-first* false)
 (def ^:dynamic *max-width* (px 1440))
 
-(def settings
+(def ^:dynamic *settings*
   {:min-width (px 400)
    :max-width (px 1200)
    :min-font (px 12)
@@ -28,10 +20,37 @@
    :header-font-weight 600
    :header-color "#111"
    :scale :golden-ratio
-   :breakpoints {:mobile (px 480)
-                 :tablet (px 960)
-                 :laptop (px 1440)
-                 :monitor (px 1920)}})
+   :media :screen
+   :breakpoints
+   {:mobile {:screen true
+             :min-width (px 320)}
+    :tablet {:screen true
+             :min-width (px 768)}
+    :laptop {:screen true
+             :min-width (px 1224)}
+    :desktop {:screen true
+              :min-width (px 1824)}
+    :hd {:screen true
+         :min-width (px 1824)}}})
+
+;(defmacro with-settings
+;  [settings & body]
+;  (binding [*settings* (merge *settings* settings)]
+;    ))
+
+(defn media-rules
+  [label]
+  (get-in *settings* [:breakpoints label]))
+
+(defn on
+  "Set rules for a particular breakpoint, by name.
+
+  (on :tablet
+    [:div
+      (column :ratio 1/2)])
+  "
+  [media rules]
+  (at-media (media-rules media) rules))
 
 (def fonts {:font-size-base (em 1.5)
             :line-height-base (em 1.45)

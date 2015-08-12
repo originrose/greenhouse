@@ -26,13 +26,13 @@
 
 (defn rand-paragraph
   [n]
-  (apply str (interpose "  " (repeatedly (+ 5 (rand-int 12)) #(rand-sentence (+ 5 (rand-int 15)))))))
+  (apply str (interpose "  " (repeatedly (+ 5 (rand-int 6)) #(rand-sentence (+ 5 (rand-int 8)))))))
 
 ;(rand-paragraph (+ 1 (rand-int 3)))
 
 (defn header []
   [:div
-   [:h3 "(center :max-width 800)"]
+   [:h3 "(center :max-width 1200)"]
    [:div.header
 
     [:h3 "(column :ratio 1/3)"]
@@ -40,6 +40,11 @@
      [:div "a"]
      [:div "b"]
      [:div "c"]]
+
+    [:h3 "(column :ratio 1/6)(column :ratio 4/6 :offset 1/6)"]
+    [:div.uneven
+     [:div.sidebar (rand-sentence 10)]
+     [:div.content (rand-paragraph 2)]]
 
     [:h3 "(column :ratio 1/5)"]
     [:div.fifths
@@ -53,7 +58,21 @@
     [:div.offset-fifths
      [:div "over here!"]]
 
-    [:h3 "(column :ratio 1/3 :cycle 3)"]
+    [:h3
+     "(stack)"
+     [:br]
+     "\t(on :tablet
+         [:& (column :ratio 1/3 :cycle 3)])"
+     [:br]
+     "(on :laptop
+         [:& (column :ratio 1/4 :cycle 4)])"
+     [:br]
+     "(on :desktop
+         [:& (column :ratio 1/5 :cycle 5)])"
+     [:br]
+     "(on :hd
+         [:& (column :ratio 1/6 :cycle 6)])"
+     ]
     [:div.cycling
      (repeatedly 12 (fn [] [:div (rand-string 8)]))]
 
@@ -82,11 +101,17 @@
 
     [:h3 "(align :horizontal)"]
     [:div.aligned "aligned!"]
+
+    [:h3 "(golden-ratio :font-size 18 :width 600)"]
+    [:div.golden
+     "By setting the line height properly with respect to the font-size and content width a
+     paragraph of text will be easier to read than if too closely packed or too far apart.
+     The golden ratio, or phi (1.618033989) is used to find the right height."]
     ]])
 
 (defn home-page []
-  [:div [:h2 "Welcome to greenhouse"]
-   [:div [:a {:href "#/about"} "go to about page"]]
+  [:div [:h2 "Greenhouse: a Jeet inspired (rip-off) CSS library for Garden"]
+   ;[:div [:a {:href "#/about"} "go to about page"]]
    [header]])
 
 (defn about-page []

@@ -27,15 +27,14 @@
             [lein-garden "0.2.6"]]
 
   :garden {:builds [{:id "screen"
-                     :source-paths ["src/clj/styles"]
-                     :stylesheet styles.core/screen
+                     :source-paths ["src/clj/greenhouse"]
+                     :stylesheet greenhouse.demo.core/screen
                      :compiler {:output-to "resources/public/css/screen.css"
                                 :pretty-print? true}}]}
   :ring {:handler greenhouse.handler/app
          :uberwar-name "greenhouse.war"}
 
   :min-lein-version "2.5.0"
-
   :uberjar-name "greenhouse.jar"
 
   :main greenhouse.server
