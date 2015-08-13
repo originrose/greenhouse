@@ -1,6 +1,6 @@
-(defproject greenhouse "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject thinktopic/greenhouse "0.1.0-SNAPSHOT"
+  :description "A ratio grid library for garden css in Clojure."
+  :url "http://github.com/thinktopic/garden"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
