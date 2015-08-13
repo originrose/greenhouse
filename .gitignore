@@ -11,3 +11,5 @@ pom.xml.asc
 /out
 /.repl
 *.log
+*.sw[op]
+ext
