@@ -9,7 +9,6 @@
 (defn rounded
   [& {:keys [radius top-left top-right bottom-right bottom-left]
       :or {top-left 0 top-right 0 bottom-right 0 bottom-left 0}}]
-  (println "rounded radius: " radius)
   (list
     (if (pos? radius)
       {:-webkit-border-radius (px radius)
@@ -32,7 +31,6 @@
 
 (defn border-side
   [side]
-  (println "SIDE: " side)
   (keyword (str "border-" (name side))))
 
 (def orthogonal
