@@ -8,7 +8,7 @@
 
 (defn rounded
   [& {:keys [radius top-left top-right bottom-right bottom-left]
-      :or {top-left 0 top-right 0 bottom-right 0 bottom-left 0}}]
+      :or {radius 0 top-left 0 top-right 0 bottom-right 0 bottom-left 0}}]
   (list
     (if (pos? radius)
       {:-webkit-border-radius (px radius)
