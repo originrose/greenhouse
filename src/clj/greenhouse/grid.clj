@@ -118,21 +118,24 @@
 
 (defn cycle-props
   "Returns the relevant properties to implementing column cycling."
-  [cycle side margin-r margin-last]
-  (if (zero? cycle)
-    [:&:last-child {(opposite-margin side) (percent margin-last)}]
+  ([n side margin]
+   (cycle-props n side margin margin))
 
-    [["&:nth-of-type(n)"
-     {(opposite-margin side) (percent margin-r)
-      :float side
-      :clear :none}]
+  ([n side margin-r margin-last]
+   (if (zero? n)
+     [:&:last-child {(opposite-margin side) (percent margin-last)}]
 
-     [(str "&:nth-of-type(" cycle "n)")
-     {(opposite-margin side) (percent margin-last)
-      :float (opposite-side side)}]
+     [["&:nth-of-type(n)"
+       {(opposite-margin side) (percent margin-r)
+        :float side
+        :clear :none}]
 
-     [(str "&:nth-of-type(" cycle "n+1)")
-     {:clear :both}]]))
+      [(str "&:nth-of-type(" n "n)")
+       {(opposite-margin side) (percent margin-last)
+        :float (opposite-side side)}]
+
+      [(str "&:nth-of-type(" n "n+1)")
+       {:clear :both}]])))
 
 (defn column
   [& {:keys [ratio offset cycle uncycle gutter]
