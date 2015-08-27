@@ -1,4 +1,4 @@
-(ns greenhouse.core
+(ns greenhouse.demo
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
               [secretary.core :as secretary :include-macros true]
