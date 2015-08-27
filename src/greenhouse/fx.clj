@@ -9,7 +9,7 @@
 (defn rounded
   [& {:keys [radius top-left top-right bottom-right bottom-left]}]
   (list
-    (if (pos? radius)
+    (if (and radius (pos? radius))
       {:-webkit-border-radius (px radius)
        :-moz-border-radius (px radius)
        :border-radius (px radius)}

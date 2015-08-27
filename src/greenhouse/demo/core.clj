@@ -6,7 +6,9 @@
     [garden.units :as u :refer [px pt em percent]]
     [garden.color :as color :refer [hsl rgba]]
     [greenhouse.grid :refer [column span clearfix center stack align on]]
-    [greenhouse.typography :refer [golden-ratio golden-line-height]]))
+    [greenhouse.typography :refer [golden-ratio golden-line-height]]
+    [greenhouse.fx :as fx]
+    ))
 
 (defstyles screen
   [[:body
@@ -96,4 +98,16 @@
 
    [:div.golden
     (golden-ratio :font-size 18 :width 600)]
+
+   [:div.rounded-radius
+    {:width 200
+     :height 50
+     :background-color :blue}
+    (fx/rounded :radius 10)]
+
+   [:div.rounded-corners
+    {:width 200
+     :height 50
+     :background-color :green}
+    (fx/rounded :top-left 10 :bottom-right 5)]
   ])
