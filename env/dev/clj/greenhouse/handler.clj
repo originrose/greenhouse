@@ -5,8 +5,7 @@
             [hiccup.core :refer [html]]
             [hiccup.page :refer [include-js include-css]]
             [prone.middleware :refer [wrap-exceptions]]
-            [ring.middleware.reload :refer [wrap-reload]]
-            [environ.core :refer [env]]))
+            [ring.middleware.reload :refer [wrap-reload]]))
 
 (def home-page
   (html
@@ -15,7 +14,7 @@
      [:meta {:charset "utf-8"}]
      [:meta {:name "viewport"
              :content "width=device-width, initial-scale=1"}]
-     (include-css (if (env :dev) "css/screen.css" "css/screen.min.css"))]
+     (include-css "css/screen.css")]
     [:body
      [:div#app
       [:h3 "ClojureScript has not been compiled!"]
@@ -30,6 +29,7 @@
   (not-found "Not Found"))
 
 (def app
-  (let [handler (wrap-defaults #'routes site-defaults)]
-    (if (env :dev) (-> handler wrap-exceptions wrap-reload) handler)))
+  (-> (wrap-defaults #'routes site-defaults)
+      wrap-exceptions
+      wrap-reload))
 

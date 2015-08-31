@@ -1,4 +1,4 @@
-(ns greenhouse.core
+(ns greenhouse.demo
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
               [secretary.core :as secretary :include-macros true]
@@ -102,11 +102,18 @@
     [:h3 "(align :horizontal)"]
     [:div.aligned "aligned!"]
 
-    [:h3 "(golden-ratio :font-size 18 :width 600)"]
+    [:h3 "(greenhouse.typography/golden-ratio :font-size 18 :width 600)"]
     [:div.golden
      "By setting the line height properly with respect to the font-size and content width a
      paragraph of text will be easier to read than if too closely packed or too far apart.
      The golden ratio, or phi (1.618033989) is used to find the right height."]
+
+    [:h2 "(:require [greenhouse.fx :as fx])"]
+    [:h4 "(fx/rounded :radius 10)"]
+    [:div.rounded-radius]
+
+    [:h4 "(fx/rounded :top-left 10 :bottom-right 5)"]
+    [:div.rounded-corners]
     ]])
 
 (defn home-page []
