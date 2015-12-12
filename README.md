@@ -7,3 +7,14 @@ To checkout the demo and documentation page do this:
     lein run
 
 Now open localhost:3000
+
+
+
+
+## Usage
+
+`[thinktopic/greenhouse "0.1.1"]`
+
+## Demo
+
+![greenhouse demo]("resources/public/images/greenhouse-demo.png")
