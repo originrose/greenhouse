@@ -17,4 +17,4 @@ Now open localhost:3000
 
 ## Demo
 
-![greenhouse demo]("resources/public/images/greenhouse-demo.png")
+![greenhouse demo]("https://raw.githubusercontent.com/thinktopic/greenhouse/master/resources/public/images/greenhouse-demo.png")
