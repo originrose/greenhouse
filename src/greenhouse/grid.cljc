@@ -137,11 +137,11 @@
       [(str "&:nth-of-type(" n "n+1)")
        {:clear :both}]])))
 
-;(defn grid
-;  []
-;  (list
-;    {:display :flex
-;     :flex-wrap :wrap}))
+(defn grid
+  []
+  (list
+    {:display :flex
+     :flex-wrap :wrap}))
 
 (defn column
   [& {:keys [ratio offset cycle uncycle gutter]
