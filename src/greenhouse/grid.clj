@@ -27,7 +27,7 @@
     :tablet {:screen true
              :min-width (px 768)}
     :laptop {:screen true
-             :min-width (px 1224)}
+             :min-width (px 1260)}
     :desktop {:screen true
               :min-width (px 1824)}
     :hd {:screen true
