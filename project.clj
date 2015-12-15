@@ -11,7 +11,7 @@
             [lein-garden "0.2.6"]]
 
   :garden {:builds [{:id "screen"
-                     :source-paths ["src/clj/greenhouse"]
+                     :source-paths ["src"]
                      :stylesheet greenhouse.demo.core/screen
                      :compiler {:output-to "resources/public/css/screen.css"
                                 :pretty-print? true}}]}

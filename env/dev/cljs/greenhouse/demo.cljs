@@ -78,13 +78,13 @@
 
     [:h3 "(column :ratio 1/2)"]
     [:div.nested
-     [:div
+     [:div.inner
       (repeat 2
               [:div.inside
                [:h4 "(column :ratio 1/3 :gutter 10)"]
                (repeatedly 3 (fn [] [:div.a (rand-string 5)]))])]
 
-     [:div
+     [:div.inner
       (repeat 2
               [:div.inside
                [:h4 "(column :ratio 1/5)"]
@@ -117,7 +117,7 @@
     ]])
 
 (defn home-page []
-  [:div [:h2 "Greenhouse: a Jeet inspired (rip-off) CSS library for Garden"]
+  [:div [:h2 "Greenhouse: A CSS grid library for Garden"]
    ;[:div [:a {:href "#/about"} "go to about page"]]
    [header]])
 

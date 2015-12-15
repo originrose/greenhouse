@@ -137,11 +137,19 @@
       [(str "&:nth-of-type(" n "n+1)")
        {:clear :both}]])))
 
-(defn grid
-  []
+(defn row
+  [& {:keys [reverse]}]
   (list
     {:display :flex
+     :flex-direction (if reverse :row-reverse :row)
      :flex-wrap :wrap}))
+
+;(defn column
+;  [& {:keys [reverse]}]
+;  (list
+;    {:display :flex
+;     :flex-direction (if reverse :column-reverse :column)
+;     :flex-wrap :wrap}))
 
 (defn column
   [& {:keys [ratio offset cycle uncycle gutter]
@@ -164,11 +172,12 @@
         margin-last (if (neg? offset) margin-r 0)
         cycles (cycle-props cycle side margin-r margin-last)]
     (list {
-           ;:flex col-width
-
-           :float side
-           :clear :none
-           :width (percent col-width)
+           :display :flex
+           :flex col-width
+           :max-width (percent col-width)
+           ;:float side
+           ;:clear :none
+           ;:width (percent col-width)
            (margin side) (percent margin-l)
            (opposite-margin side) (percent margin-r)}
           cycles)))
@@ -188,12 +197,12 @@
                   [(str "&:nth-of-type(" cycle "n+1)")
                    {:clear :both}]]
                  [])]
-    (list {;:flex (if width
-           ;        [[0 0 (px span-width)]]
-           ;        span-width)
-           :float side
-           :clear :none
-           :width (percent span-width)
+    (list {:flex (if width
+                   [[0 0 (px span-width)]]
+                   span-width)
+           ;:float side
+           ;:clear :none
+           ;:width (percent span-width)
            (margin side) (percent margin-l)
            (opposite-margin side) (percent margin-r)}
           cycles)))
