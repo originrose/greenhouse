@@ -1,0 +1,23 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font: "SuperFont"
+}
+
+h1, h2 {
+  margin-top: 10px;
+  border-bottom: 1px solid red;
+}
+
+.foo p {
+  color: rgb(200, 200, 200);
+}
+
+/* All spans with a "lang" attribute are bold */
+span[lang] {font-weight:bold;}
+ 
+/* All spans in Portuguese are green */
+span[lang="pt"] {color:green;}
+
+/* All spans in US English are blue  */
+span[lang~="en-us"] {color: blue;}

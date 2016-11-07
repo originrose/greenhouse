@@ -5,10 +5,11 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [garden "1.2.5"]]
+                 [garden "1.3.2"]
+                 [com.helger/ph-css "5.0.2"]]
 
   :plugins [[lein-asset-minifier "0.2.2"]
-            [lein-garden "0.2.6"]]
+            [lein-garden "0.3.0"]]
 
   :garden {:builds [{:id "screen"
                      :source-paths ["src/clj/greenhouse"]
