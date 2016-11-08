@@ -9,7 +9,10 @@
            [com.helger.css.decl.visit CSSVisitor DefaultCSSVisitor]
            [com.helger.css.writer CSSWriterSettings])
   (:require [clojure.java.io :as io]
-            [garden.selectors :refer [attr]]))
+            [garden.selectors :refer [attr]]
+            [camel-snake-kebab.core :refer [->kebab-case]]))
+
+(def libs* (atom {}))
 
 (definterface PGarden
   (toGarden []))
@@ -89,22 +92,34 @@
 
 (defn css->garden-visitor
   []
-  (let [state* (atom {:styles []})]
+  (let [state* (atom {:styles [] ; accumulates all of the parsed styles
+                      :selectors nil ; holds the current rule's selectors
+                      :classes {} ; accumlutes all the single class styles
+                      })]
     (proxy [DefaultCSSVisitor PGarden] []
       (onBeginStyleRule [rule]
         (let [selectors (parse-selectors (.getAllSelectors rule))]
-          (swap! state* assoc :rule selectors :declarations {})))
+          (swap! state* assoc :selectors selectors :declarations {})))
 
       (onEndStyleRule [rule]
-        (swap! state* (fn [{:keys [styles rule declarations] :as state}]
-                        (assoc state :styles (conj styles (conj rule declarations))))))
+        (swap! state*
+               (fn [{:keys [styles selectors declarations classes] :as state}]
+                 (let [styles (conj styles (conj selectors declarations))
+                       fs (first selectors)
+                       classes (if (and (= 1 (count selectors))
+                                        (keyword? fs))
+                                 (assoc classes fs declarations
+                                        (keyword (->kebab-case (subs (name fs) 1)))
+                                        declarations)
+                                 classes)]
+                   (assoc state :styles styles :classes classes)))))
 
       (onDeclaration [decl]
         (swap! state* assoc-in [:declarations (keyword (.getProperty decl))]
                (parse-expression (.getExpression decl))))
 
       (toGarden []
-        (:styles @state*)))))
+        @state*))))
 
 (defn parse-css-dom
   "Parse a CSS string"
@@ -127,5 +142,24 @@
                                         CCharset/CHARSET_UTF_8_OBJ
                                         ECSSVersion/CSS30)]
     (parse-css-dom css-dom)))
+
+(defn import-file
+  "Import the classes from a CSS file.
+  e.g.
+    (import-file \"resources/\""
+  [css-ns path]
+  (let [{:keys [classes styles]} (parse-css-file path)]
+    (swap! libs* assoc (name css-ns) classes)
+    :done))
+
+(defn clear-imports
+  []
+  (reset! libs* {}))
+
+(defn mixin
+  [ns-class]
+  (if-let [styles (get-in @libs* [(namespace ns-class) (keyword (name ns-class))])]
+    (list styles)
+    (throw (Exception. (format "\n\tInvalid css mixin: %s" ns-class)))))
 
 

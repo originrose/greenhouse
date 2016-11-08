@@ -6,7 +6,8 @@
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [garden "1.3.2"]
-                 [com.helger/ph-css "5.0.2"]]
+                 [com.helger/ph-css "5.0.2"]
+                 [camel-snake-kebab "0.4.0"]]
 
   :plugins [[lein-asset-minifier "0.2.2"]
             [lein-garden "0.3.0"]]
