@@ -54,6 +54,10 @@
      {:background-color (rgba 200 200 250 0.5)
       :margin-bottom (px 5)}]]
 
+   [:div.cols-with-image
+    [:div (column :ratio 1/3)]
+    [:img (column :ratio 2/3)]]
+
    [:div.cycling
     [:div
      (stack)

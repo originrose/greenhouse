@@ -58,6 +58,11 @@
     [:div.offset-fifths
      [:div "over here!"]]
 
+    [:h3 "(column :ratio 1/3) (column :ratio 2/3)"]
+    [:div.cols-with-image
+     [:div "first column"]
+     [:img {:src "images/thinktopic-logo-small.jpg"}]]
+
     [:h3
      "(stack)"
      [:br]
