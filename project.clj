@@ -1,4 +1,4 @@
-(defproject thinktopic/greenhouse "0.1.1"
+(defproject thinktopic/greenhouse "0.2.0-SNAPSHOT"
   :description "A ratio grid library for garden css in Clojure."
   :url "http://github.com/thinktopic/garden"
   :license {:name "Eclipse Public License"
