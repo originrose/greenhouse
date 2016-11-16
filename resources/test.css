@@ -15,9 +15,68 @@ h1, h2 {
 
 /* All spans with a "lang" attribute are bold */
 span[lang] {font-weight:bold;}
- 
+
 /* All spans in Portuguese are green */
 span[lang="pt"] {color:green;}
 
 /* All spans in US English are blue  */
 span[lang~="en-us"] {color: blue;}
+
+@media(max-width: 600px) {
+  .foo {
+    color: rgb(200, 0, 0);
+  }
+}
+
+@media screen and (min-width: 700px) and (orientation: landscape) {
+  .foo {
+    color: rgb(0, 0, 0);
+  }
+}
+
+/*
+@media screen and not braille {
+  .foo {
+    color: rgb(0, 0, 200);
+  }
+}
+*/
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}
