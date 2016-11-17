@@ -19,7 +19,7 @@
 (definterface PGarden
   (toGarden []))
 
-(defn as-css
+(defn- as-css
   [v]
   (.getAsCSSString v (CSSWriterSettings.) 0))
 
@@ -39,12 +39,12 @@
   [m]
   (as-css m))
 
-(defn parse-selector
+(defn- parse-selector
   [s]
   (let [members (map parse-selector-member (.getAllMembers s))]
     members))
 
-(defn parse-selectors
+(defn- parse-selectors
   [selectors]
   (vec (apply concat (map parse-selector selectors))))
 
@@ -53,7 +53,7 @@
   [m]
   (as-css m))
 
-(defn parse-expression
+(defn- parse-expression
   "Parses the value side of a declaration.
   e.g.
     color: rgb(200, 100, 213);
@@ -64,29 +64,29 @@
   (let [members (map parse-expression-member (.getAllMembers expr))]
     (apply str (interpose " " members))))
 
-(defn parse-media-query
+(defn- parse-media-query
   [q]
   (let [medium (.getMedium q)
         med-kw (when medium
-                     (keyword (.toLowerCase medium)))
+                     (keyword (->kebab-case medium)))
         modifier (.getModifier q)
         mod-kw (if (not= modifier com.helger.css.decl.CSSMediaQuery$EModifier/NONE)
-                 (keyword (.toLowerCase (.getCSSText modifier)))
+                 (keyword (->kebab-case (.getCSSText modifier)))
                  false)
         media (if medium
                 {med-kw (or mod-kw true)}
                 {})
         expressions (into media (map (fn [expr]
-                                       [(keyword (.toLowerCase (.getFeature expr))) (parse-expression (.getValue expr))])
+                                       [(keyword (->kebab-case (.getFeature expr))) (parse-expression (.getValue expr))])
                                      (.getAllMediaExpressions q)))]
     expressions))
 
-(defn parse-media-rule
+(defn- parse-media-rule
   [query-rule]
   (let [queries (.getAllMediaQueries query-rule)]
     (at-media (apply merge (map parse-media-query queries)))))
 
-(defn css->garden-visitor
+(defn- css->garden-visitor
   []
   (let [state* (atom {:styles [] ; accumulates all of the parsed styles
                       :selectors nil ; holds the current rule's selectors
@@ -135,7 +135,7 @@
         (swap! state*
                (fn [{:keys [keyframe-rule keyframe-blocks styles] :as state}]
                  (assoc state
-                        :styles (conj styles (apply list 'at-keyframes (keyword (.toLowerCase (.getAnimationName rule)))
+                        :styles (conj styles (apply list 'at-keyframes (keyword (->kebab-case (.getAnimationName rule)))
                                                     keyframe-blocks))
                         :keyframe-blocks []))))
 
@@ -143,7 +143,7 @@
       (onEndKeyframesBlock [block]
         (swap! state*
                (fn [{:keys [keyframe-blocks declarations] :as state}]
-                   (assoc state :keyframe-blocks (conj keyframe-blocks [(keyword (.toLowerCase (first (.getAllKeyframesSelectors block))))
+                   (assoc state :keyframe-blocks (conj keyframe-blocks [(keyword (->kebab-case (first (.getAllKeyframesSelectors block))))
                                                                         declarations])))))
 
       (onDeclaration [decl]
@@ -153,15 +153,15 @@
       (toGarden []
         @state*))))
 
-(defn parse-css-dom
-  "Parse a CSS string"
+(defn- parse-css-dom
+  "Parse a CSS dom tree into Garden data structures."
   [css-dom]
   (let [visitor (css->garden-visitor)]
     (CSSVisitor/visitCSS css-dom visitor)
     (.toGarden visitor)))
 
-(defn parse-css-str
-  "Parse a CSS string"
+(defn- parse-css-str
+  "Parse a CSS string into Garden data structures."
   [css-str]
   (let [css-dom (CSSReader/readFromString css-str
                                           CCharset/CHARSET_UTF_8_OBJ

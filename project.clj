@@ -1,6 +1,6 @@
 (defproject thinktopic/greenhouse "0.2.0"
-  :description "A ratio grid library for garden css in Clojure."
-  :url "http://github.com/thinktopic/garden"
+  :description "A set of Garden tools including a grid library css in Clojure."
+  :url "http://github.com/thinktopic/greenhouse."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
