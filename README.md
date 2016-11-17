@@ -1,4 +1,4 @@
-An grid system for Garden CSS in Clojure based on Jeet (http://jeet.gs/).
+A grid system for Garden CSS in Clojure based on Jeet (http://jeet.gs/).
 
 To checkout the demo and documentation page do this:
 
@@ -13,7 +13,7 @@ Now open localhost:3000
 
 ## Usage
 
-`[thinktopic/greenhouse "0.1.1"]`
+`[thinktopic/greenhouse "0.2.0"]`
 
 ## Demo
 
