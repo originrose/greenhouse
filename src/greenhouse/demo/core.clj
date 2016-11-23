@@ -1,14 +1,11 @@
 (ns greenhouse.demo.core
   (:require
-    [garden.def :refer [defstylesheet defstyles]]
-    [garden.core :refer [css]]
-    [garden.stylesheet :refer [at-media]]
+    [garden.def :refer [defstyles]]
     [garden.units :as u :refer [px pt em percent]]
     [garden.color :as color :refer [hsl rgba]]
     [greenhouse.grid :refer [column span clearfix center stack align on]]
     [greenhouse.typography :refer [golden-ratio golden-line-height]]
-    [greenhouse.fx :as fx]
-    ))
+    [greenhouse.fx :as fx]))
 
 (defstyles screen
   [[:body
