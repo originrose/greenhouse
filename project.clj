@@ -4,6 +4,9 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
+  :think/meta {:type :library
+               :tags [:ui :css :cljs]}
+
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [garden "1.3.2"]
                  [com.helger/ph-css "5.0.2"]
