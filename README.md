@@ -19,6 +19,7 @@ visually see examples of the different layout tools included.
 
 Then add the necessary namespaces to your require form:
 
+```clojure
 (ns greenhouse.demo.core
   (:require
     [garden.def :refer [defstyles]]
@@ -27,6 +28,7 @@ Then add the necessary namespaces to your require form:
     [greenhouse.grid :refer [column span clearfix center stack align on]]
     [greenhouse.typography :refer [golden-ratio]]
     [greenhouse.fx :as fx]))
+```
 
 ### Flexible grids
 
